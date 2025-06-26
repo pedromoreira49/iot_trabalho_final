@@ -83,7 +83,7 @@ As instruções detalhadas de instalação desta aplicação envole o seguinte p
   docker compose up -d
   ```
 
-**Observação Importante:** Recomenda-se consultar o status dos containers para checar sua disponibilidade. Após o compando `docker compose up -d` deve-se ter 5 containers rodando na máquina alvo. Para verificar, rode o comando:
+**Observação Importante:** Recomenda-se consultar o status dos containers para checar sua disponibilidade. Após o comando `docker compose up -d` deve-se ter 5 containers rodando na máquina alvo. Para verificar, rode o comando:
 
 ```bash
 docker ps
