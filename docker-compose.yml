@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - influxdb
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # AMQP
+      - "15672:15672"   # Web Admin
+      - "1883:1883"     # MQTT!
+    environment:
+      RABBITMQ_DEFAULT_USER: <user>
+      RABBITMQ_DEFAULT_PASS: <password>
+    volumes:
+      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+  influxdb:
+    image: influxdb:2
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: <admin>
+      DOCKER_INFLUXDB_INIT_PASSWORD: <password>
+      DOCKER_INFLUXDB_INIT_ORG: <org_example>
+      DOCKER_INFLUXDB_INIT_BUCKET: <bucket_example>
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: <token>
+
+  php:
+    build: .
+    container_name: php
+    volumes:
+      - ./:/var/www/html/iot-galpao
+    ports:
+      - "8080:80"
+    depends_on:
+      - rabbitmq
+      - influxdb
+      - grafana
+  
+  sensors:
+    build: ./sensors
+    container_name: sensores_virtuais
+    depends_on:
+      - rabbitmq
