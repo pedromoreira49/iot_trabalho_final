@@ -41,7 +41,7 @@ As instruções detalhadas de instalação desta aplicação envole o seguinte p
   RABBITMQ_VHOST=
   ```
 
-- **Configuração:** Também é necessário definir o organização, bucket e token para InfluxDB. (Para gerar o token do INFLUX, é recomendável utilizar ![esta ferramenta](https://it-tools.tech/token-generator)).
+- **Configuração:** Também é necessário definir o organização, bucket e token para InfluxDB. (Para gerar o token do INFLUX, é recomendável utilizar [esta ferramenta](https://it-tools.tech/token-generator)).
   ```bash
     INFLUX_ORG=
     INFLUX_BUCKET=
