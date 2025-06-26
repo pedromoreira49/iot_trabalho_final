@@ -1,0 +1,23 @@
+{
+  "name": "sensors",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "qualidade_ar": "node galpao/qualidade_ar.js",
+    "luminosidade": "node galpao/luminosidade.js",
+    "temperatura": "node galpao/temperatura.js",
+    "umidade": "node galpao/umidade.js",
+    "all": "concurrently \"npm run qualidade_ar\" \"npm run luminosidade\" \"npm run temperatura\" \"npm run umidade\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mqtt": "^5.12.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}
